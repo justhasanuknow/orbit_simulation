@@ -1,0 +1,36 @@
+# Compiled object & binary files
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.out
+*.app
+
+# Debug symbols
+*.dSYM/
+*.pdb
+*.idb
+
+# Local binary in this project
+/main
+
+# CMake
+build/
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+install_manifest.txt
+Makefile
+compile_commands.json
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*~

@@ -1,0 +1,7 @@
+{
+    "editor.wordWrap": "on",
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+}
