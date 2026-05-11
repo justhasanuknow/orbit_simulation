@@ -4,4 +4,8 @@
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
+    "[cmake]": {
+        "editor.defaultFormatter": "KylinIdeTeam.cmake-intellisence"
+    },
+    "cmake.clearOutputBeforeBuild": true,
 }
