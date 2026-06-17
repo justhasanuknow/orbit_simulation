@@ -1,49 +1,90 @@
-# cpp-start
+# C++ Planet Simulation
 
-Solar system simülasyonu — CMake tabanlı C++ projesi.
+A small C++ learning project that renders a simple orbital planet simulation with [raylib](https://www.raylib.com/) and CMake.
 
-## Gereksinimler
+The goal of this repository is not to build a physically perfect astronomy simulator. It is a hands-on project for practicing C++ fundamentals through a visual, game-development-style codebase: classes, encapsulation, coordinates, entity collections, rendering, animation, and basic input handling.
 
-- CMake 3.10+
-- C++ derleyici (g++, clang++, vb.)
+## Current Features
+
+- A raylib window that renders the Sun and planets.
+- Planets are created dynamically with their own:
+  - name
+  - gravity modifier
+  - screen position
+  - diameter
+  - color
+  - orbit radius and speed
+- Planets orbit around the Sun using simple `sin` / `cos` based circular motion.
+- Orbit paths are drawn on screen.
+- A basic speed slider controls the simulation speed at runtime.
+- Project is organized into small C++ classes for simulation, rendering helpers, coordinates, planets, and planet collections.
+
+## Project Structure
+
+```text
+.
+|-- CMakeLists.txt
+|-- build.sh
+|-- README.md
+`-- src/
+    |-- main.cpp
+    |-- core/
+    |   `-- simulation/
+    |-- entities/
+    |   |-- planet/
+    |   `-- planet_collection/
+    |-- helpers/
+    |   `-- raylib/
+    `-- utils/
+        `-- coordinates/
+```
+
+## Requirements
+
+- CMake 3.14+
+- A C++17 compatible compiler
 - Bash
+- Internet access on the first configure step, because CMake fetches raylib with `FetchContent`
 
-## Build & Çalıştırma
+## Build and Run
 
-Projeyi derleyip çalıştırmak için kök dizindeki `build.sh` scripti kullanılır.
+Use the helper script from the project root:
 
 ```bash
-./build.sh                # konfigüre + build + çalıştır
-./build.sh clean          # build/ dizinini silip sıfırdan başlar
-./build.sh arg1 arg2      # argümanları main'e iletir
+./build.sh
 ```
 
-Script şunları yapar:
+Clean and rebuild from scratch:
 
-1. `cmake -S . -B build` ile projeyi konfigüre eder (cache varsa yeniden kullanır → hızlı incremental build).
-2. `cmake --build build -j$(nproc)` ile paralel derler.
-3. `build/main` executable'ını çalıştırır, verilen argümanları aktarır.
-
-## Proje Yapısı
-
-```
-.
-├── CMakeLists.txt
-├── build.sh
-└── src/
-    ├── main.cpp
-    └── core/
-        ├── planet/
-        ├── simulation/
-        └── solar_system/
+```bash
+./build.sh clean
 ```
 
-## Manuel Build
+The script configures CMake, builds the project, and then runs the executable.
 
-`build.sh` kullanmadan elle derlemek istersen:
+## Manual Build
+
+If you prefer running the commands yourself:
 
 ```bash
 cmake -S . -B build
 cmake --build build -j$(nproc)
 ./build/main
 ```
+
+## Learning Goals
+
+This project is a playground for improving C++ and game-development fundamentals:
+
+- Modeling data with classes and structs
+- Separating responsibilities across files and modules
+- Passing objects between systems
+- Using smart pointers and collections
+- Building with CMake
+- Rendering with raylib
+- Updating objects over time with a game loop
+- Handling simple UI input
+
+## Notes
+
+The orbital values are intentionally scaled for readability on screen. Planet sizes, distances, and speeds are not real-world accurate; they are tuned to make the simulation easy to see and useful for learning.
