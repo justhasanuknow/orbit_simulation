@@ -4,6 +4,7 @@
 
 class PlanetCollection;
 class Planet;
+class Coordinate;
 struct PlanetColor;
 
 class RaylibHelper {
@@ -11,6 +12,7 @@ class RaylibHelper {
     RaylibHelper() = default;
     ~RaylibHelper() = default;
     const float ballRadius = 20;
+    void centerSystem(PlanetCollection& planets, Coordinate center) const;
     void updatePlanets(PlanetCollection& planets, float deltaTime, float speedMultiplier) const;
     void drawPlanets(const PlanetCollection& planets) const;
     void drawOrbitPaths(const PlanetCollection& planets) const;

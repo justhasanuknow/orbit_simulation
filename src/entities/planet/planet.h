@@ -51,6 +51,7 @@ class Planet {
     Coordinate getPosition() const;
 
     void setOrbit(Coordinate center, float radius, float speed, float angle);
+    void setOrbitCenter(Coordinate center);
     bool hasOrbit() const;
     Coordinate getOrbitCenter() const;
     float getOrbitRadius() const;

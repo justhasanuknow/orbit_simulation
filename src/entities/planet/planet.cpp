@@ -67,6 +67,10 @@ void Planet::setOrbit(Coordinate center, float radius, float speed, float angle)
     this->orbitAngle = angle;
 }
 
+void Planet::setOrbitCenter(Coordinate center) {
+    this->orbitCenter = center;
+}
+
 bool Planet::hasOrbit() const {
     return this->orbitEnabled;
 }

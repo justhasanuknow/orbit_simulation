@@ -9,15 +9,16 @@
 #include "raylib.h"
 
 void RaylibHelper::initializeWindow() const {
-    const int windowWidth = 1600;
-    const int windowHeight = 720;
+    const int windowWidth = 960;
+    const int windowHeight = 960;
 
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(windowWidth, windowHeight, "Planet Simulation");
 
     SetTargetFPS(144);
 
     const std::unique_ptr<PlanetCollection> planets{new PlanetCollection()};
-    const Coordinate sunPosition({800.0f, 360.0f});
+    const Coordinate sunPosition({windowWidth / 2.0f, windowHeight / 2.0f});
     float simulationSpeed = 1.0f;
 
     planets->addPlanet("Sun", 27.94f, sunPosition, 110, PlanetColor{255, 205, 50, 255});
@@ -42,6 +43,9 @@ void RaylibHelper::initializeWindow() const {
 
     while (!WindowShouldClose()) {
         const float deltaTime = GetFrameTime();
+
+        const Coordinate center({GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f});
+        this->centerSystem(*planets, center);
         this->updatePlanets(*planets, deltaTime, simulationSpeed);
 
         BeginDrawing();
@@ -49,7 +53,11 @@ void RaylibHelper::initializeWindow() const {
         ClearBackground(BLACK);
 
         DrawFPS(10, 10);
-        DrawText("Orbit Simulation", 620, 40, 36, RAYWHITE);
+
+        const char* title = "Orbit Simulation";
+        const int titleFontSize = 36;
+        const int titleX = (GetScreenWidth() - MeasureText(title, titleFontSize)) / 2;
+        DrawText(title, titleX, 40, titleFontSize, Color{255, 255, 255, 120});
 
         this->drawOrbitPaths(*planets);
         this->drawPlanets(*planets);
@@ -75,6 +83,16 @@ Vector2 RaylibHelper::getRandomCoordinates() const {
     const Vector2 coordinates{randomWidth, randomHeight};
 
     return coordinates;
+}
+
+void RaylibHelper::centerSystem(PlanetCollection& planets, Coordinate center) const {
+    for (const std::unique_ptr<Planet>& planet : planets.getPlanets()) {
+        if (planet->hasOrbit()) {
+            planet->setOrbitCenter(center);
+        } else {
+            planet->setPosition(center);
+        }
+    }
 }
 
 void RaylibHelper::updatePlanets(PlanetCollection& planets, float deltaTime, float speedMultiplier) const {
@@ -113,7 +131,9 @@ void RaylibHelper::drawPlanets(const PlanetCollection& planets) const {
 }
 
 float RaylibHelper::drawSpeedSlider(float currentSpeed) const {
-    const Rectangle track{40.0f, 660.0f, 260.0f, 8.0f};
+    const float trackWidth = 260.0f;
+    const float trackHeight = 8.0f;
+    const Rectangle track{(GetScreenWidth() - trackWidth) / 2.0f, GetScreenHeight() - 60.0f, trackWidth, trackHeight};
     const float minSpeed = 0.0f;
     const float maxSpeed = 100.0f;
     const Vector2 mousePosition = GetMousePosition();
