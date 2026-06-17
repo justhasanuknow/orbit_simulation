@@ -49,7 +49,7 @@ void RaylibHelper::initializeWindow() const {
         ClearBackground(BLACK);
 
         DrawFPS(10, 10);
-        DrawText("Planet Simulation", 620, 40, 36, RAYWHITE);
+        DrawText("Orbit Simulation", 620, 40, 36, RAYWHITE);
 
         this->drawOrbitPaths(*planets);
         this->drawPlanets(*planets);
