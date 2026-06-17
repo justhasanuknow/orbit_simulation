@@ -21,7 +21,7 @@ set(BUILD_GAMES OFF CACHE BOOL "" FORCE)
 fetchcontent_makeavailable(raylib)
 
 add_library(simulation src/core/simulation/simulation.cpp)
-add_library(solar src/entities/solar_system/solar_system.cpp src/entities/planet/planet.cpp)
+add_library(solar src/entities/planet_collection/planet_collection.cpp src/entities/planet/planet.cpp src/utils/coordinates/coordinate.cpp)
 add_library(helpers src/helpers/raylib/raylib_helper.cpp)
 
 target_include_directories(solar PUBLIC ${CMAKE_SOURCE_DIR}/src/core/solar_system)
